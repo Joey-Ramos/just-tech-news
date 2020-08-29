@@ -1,25 +1,29 @@
 async function upvoteClickHandler(event) {
-    event.preventDefault();
+  event.preventDefault();
+  // console.log('Upvote button clicked.');
 
-    const id = window.location.toString().split('/')[
-        window.location.toString().split('/').length -1
-    ];
+  const id = window.location.toString().split('/')[
+    window.location.toString().split('/').length - 1
+  ];
+  // console.log(id);
 
-    const response = await fetch('/api/posts/upvote', {
-        method: 'PUT',
-        body: JSON.stringify({
-          post_id: id
-        }),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
-      
-      if (response.ok) {
-        document.location.reload();
-      } else {
-        alert(response.statusText);
-      }
+  // controllers/api/post-routes
+  const response = await fetch('/api/posts/upvote', {
+    method: 'PUT',
+    body: JSON.stringify({
+      post_id: id
+    }),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
+
+  if (response.ok) {
+    console.log('Response received.');
+    document.location.reload();
+  } else {
+    alert(response.statusText);
+  }
 }
 
 document.querySelector('.upvote-btn').addEventListener('click', upvoteClickHandler);
